@@ -16,7 +16,7 @@ class Controller extends BaseController
 	{
 		$faker = Factory::create('ru_RU');
 		$data = [];
-		$countNumber = mt_rand(5, 15);
+		$countNumber = mt_rand(3, 7);
         $category = $this->getCategory();
 		for ($i = 0; $i < count($category); $i++) {
             for ($j = 0; $j < $countNumber; $j++) {
@@ -25,11 +25,31 @@ class Controller extends BaseController
                     'id' => $i * $countNumber + $j + 1,
                     'category_id' => $randCategory['id'],
                     'category' => $randCategory['title'],
-                    'title' => $faker->jobTitle(),
+                    'title' => "Post title № ". $i * $countNumber + $j + 1,
                     'description' => "<strong>" . $faker->sentence(5) . "</strong>",
+					'full_description' => $faker->text(400),
                     'author' => $faker->name(),
                     'created_at' => now()
                 ];
+            }
+		}
+
+		return $data;
+	}
+
+	protected function getOneNews($id): array
+	{
+		$newsList = $this->getNews();
+		return $newsList[$id-1];
+	}
+
+	protected function getNewsByCategory($category_id): array
+	{
+		$newsList = $this->getNews();
+		$data = [];
+		for ($i = 0; $i < count($newsList); $i++) {
+            if ($newsList[$i]['category_id'] == $category_id) {
+                $data[] = $newsList[$i];
             }
 		}
 

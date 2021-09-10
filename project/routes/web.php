@@ -18,11 +18,11 @@ use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/home', [HomepageController::class, 'index'])
+Route::get('/', [HomepageController::class, 'index'])
     ->name('home');
 
 //admin
