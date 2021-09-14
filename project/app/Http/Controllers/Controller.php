@@ -25,7 +25,7 @@ class Controller extends BaseController
                     'id' => $i * $countNumber + $j + 1,
                     'category_id' => $randCategory['id'],
                     'category' => $randCategory['title'],
-                    'title' => "Post title № ". $i * $countNumber + $j + 1,
+                    'title' => "Post title № ". ($i * $countNumber + $j + 1),
                     'description' => "<strong>" . $faker->sentence(5) . "</strong>",
 					'full_description' => $faker->text(400),
                     'author' => $faker->name(),

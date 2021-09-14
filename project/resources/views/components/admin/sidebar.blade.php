@@ -48,14 +48,14 @@
     </li>
 
     <!-- Nav Item - Charts -->
-    <li class="nav-item">
+    <li class="nav-item @if(request()->routeIs('admin.categories.*')) active @endif">
         <a class="nav-link" href="{{ route('admin.categories.index') }}">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Рубрики</span></a>
     </li>
 
     <!-- Nav Item - Tables -->
-    <li class="nav-item active">
+    <li class="nav-item @if(request()->routeIs('admin.news.*')) active @endif">
         <a class="nav-link" href="{{ route('admin.news.index') }}">
             <i class="fas fa-fw fa-table"></i>
             <span>Новости</span></a>

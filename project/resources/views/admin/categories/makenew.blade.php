@@ -11,7 +11,7 @@
 <form action="#" method="post">
     <div class="form-group">
         <label for="title">Название рубрики<em>*</em></label>
-        <input type="text" class="form-control" id="title" autofocus>
+        <input type="text" class="form-control" id="title" value="{{ old('title') }}" autofocus>
     </div>
     <button type="submit" class="btn btn-primary">Сохранить</button>
     <a class="btn btn-primary" href="{{ route('admin.categories.index') }}">Назад</a>

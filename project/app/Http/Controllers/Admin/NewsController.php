@@ -37,7 +37,7 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect(route('admin.news.index'));
     }
 
     /**

@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\ContactsController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 
@@ -22,6 +24,7 @@ use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 //     return view('welcome');
 // });
 
+//homepage
 Route::get('/', [HomepageController::class, 'index'])
     ->name('home');
 
@@ -44,3 +47,15 @@ Route::get('/categories', [CategoryController::class, 'index'])
 Route::get('/category/{id}', [CategoryController::class, 'show'])
     ->where('id', '\d+')
     ->name('category.show');
+
+//contacts
+Route::get('/contacts', [ContactsController::class, 'index'])
+    ->name('contacts');
+Route::post('/contacts/store', [ContactsController::class, 'store'])
+    ->name('contacts.store');
+
+//order
+Route::get('/order', [OrderController::class, 'index'])
+    ->name('order');
+Route::post('/order/store', [OrderController::class, 'store'])
+    ->name('order.store');
