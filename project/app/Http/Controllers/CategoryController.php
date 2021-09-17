@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class CategoryController extends Controller
 {
     public function index() {
@@ -12,9 +10,9 @@ class CategoryController extends Controller
 		]);
 	}
 
-	public function show(int $id) {
+	public function show(int $category_id) {
 		return view('category.show', [
-			'newsList' => $this->getNewsByCategory($id),
+			'newsList' => $this->getNewsByCategory($category_id),
 			'categoryList' => $this->getCategory()
 		]);
 	}

@@ -21,7 +21,7 @@
                 <div class="col-sm-6">
                     <ul class="list-unstyled mb-0">
                         @forelse($categoryList as $category)
-                            <li><a href=<?= route('category.show', ['id' => $category['id']]) ?>><?= $category['title'] ?></a></li>
+                            <li><a href={{ route('category.show', ['id' => $category->id]) }}>{{ $category->title }}</a></li>
                         @empty
                             <li>Рубрики формируются</li>
                         @endforelse

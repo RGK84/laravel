@@ -15,12 +15,8 @@
             <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" autofocus>
         </div>
         <div class="form-group">
-            <label for="text">Текст новости<em>*</em></label>
-            <textarea type="text" name="full_description" class="form-control" cols="80" rows="10" id="text">{{ old('full_description') }}</textarea>
-        </div>
-        <div class="form-group">
-            <label for="description">Краткое описание</label>
-            <input type="text" class="form-control" name="description" id="description" value="{{ old('description') }}>
+            <label for="description">Текст новости<em>*</em></label>
+            <textarea type="text" name="description" class="form-control" cols="80" rows="10" id="description">{{ old('description') }}</textarea>
         </div>
         <button type="submit" class="btn btn-primary">Сохранить</button>
         <a class="btn btn-primary" href="{{ route('admin.news.index') }}">Назад</a>

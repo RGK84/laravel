@@ -14,10 +14,10 @@
             <h2 class="card-title">На текущий момент на сайте представлено:</h2>
         </div>
         <div class="card-body">
-            <h2 class="card-title"><a href=<?= route('categories') ?>>Категорий</a>: <?= $categoryCount ?></h2>
+            <h2 class="card-title"><a href=<?= route('categories') ?>>Категорий</a>: {{ $categoryCount }}</h2>
         </div>
         <div class="card-body">
-            <h2 class="card-title"><a href=<?= route('news') ?>>Статей</a>: <?= $newsCount ?></h2>
+            <h2 class="card-title"><a href=<?= route('news') ?>>Статей</a>: {{ $newsCount }}</h2>
         </div>
     </div>
 @endsection
