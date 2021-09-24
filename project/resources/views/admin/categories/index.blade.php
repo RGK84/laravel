@@ -11,6 +11,8 @@
 		<a href="{{ route('admin.categories.create') }}" class="btn btn-primary">Создать новую</a>
 	</div>
 
+    @include('include.messages')
+
 	<!-- DataTales Example -->
 	<div class="card shadow mb-4">
 		<div class="card-body">
@@ -20,6 +22,7 @@
 						<tr>
 							<th>ID</th>
 							<th>Категория</th>
+                            <th>Кол-во статей</th>
 							<th>Управление</th>
 						</tr>
 					</thead>
@@ -28,10 +31,11 @@
 							<tr>
 								<td>{{ $category->id }}</td>
 								<td>{{ $category->title }}</td>
+                                <td>{{ $category->news_count }}</td>
 								<td>
 									<a href="{{ route('admin.categories.edit', ['category' => $category->id]) }}" class="btn btn-primary">Редакт.</a>
 									&nbsp;
-									<a href="{{ route('admin.categories.destroy', ['category' => $category->id]) }}" class="btn btn-primary">Удалить</a>
+                                    <a href="javascript:;" class="btn btn-primary delete" rel="{{ $category->id }}">Удалить</a>
 								</td>
 							</tr>
 						@empty
@@ -43,3 +47,30 @@
 		</div>
 	</div>
 @endsection
+
+@push('js')
+    <script>
+        $(function() {
+            $(".delete").on('click', function() {
+                let id = $(this).attr("rel");
+                if(confirm("Подтверждаете удаление записи с #ID " + id)) {
+                    $.ajax({
+                        type: "delete",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: "/admin/categories/" + id,
+                        success: function (response) {
+                            alert("Запись успешно удалена");
+                            console.log(response);
+                            location.reload();
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+@endpush

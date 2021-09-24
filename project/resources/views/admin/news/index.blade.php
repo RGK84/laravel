@@ -11,6 +11,8 @@
 		<a href="{{ route('admin.news.create') }}" class="btn btn-primary">Создать новую</a>
 	</div>
 
+    @include('include.messages')
+
 	<!-- DataTales Example -->
 	<div class="card shadow mb-4">
 		<div class="card-body">
@@ -31,15 +33,15 @@
 						@forelse($newsList as $news)
 							<tr>
 								<td>{{ $news->id }}</td>
-								<td>{{ $news->categoryTitle }}</td>
+								<td>{{ $news->category->title }}</td>
 								<td>{{ $news->title }}</td>
 								<td>{{ mb_substr($news->description, 0, 100) }}</td>
-                                <td>{{ $news->sourceTitle }}</td>
+                                <td>{{ $news->source->title }}</td>
 								<td>{{ $news->created_at }}</td>
 								<td>
 									<a href="{{ route('admin.news.edit', ['news' => $news->id]) }}" class="btn btn-primary">Редакт.</a>
 									&nbsp;
-									<a href="{{ route('admin.news.destroy', ['news' => $news->id]) }}" class="btn btn-primary">Удалить</a>
+                                    <a href="javascript:;" class="btn btn-primary delete" rel="{{ $news->id }}">Удалить</a>
 								</td>
 							</tr>
 						@empty
@@ -50,19 +52,35 @@
 			</div>
 		</div>
 		@empty(!$newsList)
-		<!-- Pagination-->
-		<nav aria-label="Pagination">
-			<hr class="my-0" />
-			<ul class="pagination justify-content-end my-4 mr-3">
-				<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Назад</a></li>
-				<li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-				<li class="page-item"><a class="page-link" href="#">15</a></li>
-				<li class="page-item"><a class="page-link" href="#">Вперед</a></li>
-			</ul>
-		</nav>
+            <!-- Pagination-->
+            {!! $newsList->links() !!}
 	@endempty
 	</div>
 @endsection
+
+@push('js')
+    <script>
+        $(function() {
+            $(".delete").on('click', function() {
+                let id = $(this).attr("rel");
+                if(confirm("Подтверждаете удаление записи с #ID " + id)) {
+                    $.ajax({
+                        type: "delete",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: "/admin/news/" + id,
+                        success: function (response) {
+                            alert("Запись успешно удалена");
+                            console.log(response);
+                            location.reload();
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+@endpush

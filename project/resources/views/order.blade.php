@@ -9,6 +9,7 @@
 @endsection
 
 @section('content')
+    @include('include.messages')
     <form action="{{ route('order.store') }}" method="post">
         @csrf
         <div class="form-group">
@@ -17,7 +18,7 @@
         </div>
         <div class="form-group">
             <label for="phone">Введите номер телефона<em>*</em></label>
-            <input type="phone" class="form-control" id="phone" name="phone" value="{{ old('phone') }}">
+            <input type="tel" class="form-control" id="phone" name="phone" value="{{ old('phone') }}">
         </div>
         <div class="form-group">
             <label for="email">Введите email<em>*</em></label>
@@ -27,6 +28,6 @@
             <label for="text">Напишите комментарий / отзыв<em>*</em></label>
             <textarea type="text" name="text" class="form-control" rows="4" id="text">{{ old('text') }}</textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Отправить</button>
+        <button type="submit" class="btn btn-primary mt-2">Отправить</button>
     </form>
 @endsection

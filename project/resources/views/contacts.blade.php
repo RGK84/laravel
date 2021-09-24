@@ -9,6 +9,7 @@
 @endsection
 
 @section('content')
+    @include('include.messages')
     <form action="{{ route('contacts.store') }}" method="post">
         @csrf
         <div class="form-group">

@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\News;
+
 class HomepageController extends Controller
 {
     public function index() {
 		return view('homepage', [
-			'newsCount' => count($this->getNews()),
-            'categoryCount' => count($this->getCategory()),
-			'categoryList' => $this->getCategory()
+			'newsCount' => News::query()->count(),
+            'categoryCount' => Category::query()->count(),
+			'categoryList' => Category::all()
 		]);
 	}
 }

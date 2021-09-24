@@ -4,35 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class News extends Model
 {
 	use HasFactory;
 
     protected $table = "news";
+    protected $fillable = [
+        'title', 'author', 'description', 'category_id', 'source_id'
+    ];
 
-    public function getNews(): Collection
-	{
-		return DB::table($this->table)
-			->join('categories', 'categories.id', '=', 'news.category_id')
-            ->join('sources', 'sources.id', '=', 'news.source_id')
-			->select("news.*", "categories.id as categoryId", "categories.title as categoryTitle", "sources.title as sourceTitle", "sources.link as sourceLink")
-			->orderBy('news.id', 'desc')
-			->get();
-    }
-
-    public function getNewsByCategory(int $category_id): Collection
+    public function category(): BelongsTo
     {
-        return DB::table($this->table)
-            ->join('categories', 'categories.id', '=', 'news.category_id')
-            ->join('sources', 'sources.id', '=', 'news.source_id')
-            ->select("news.*", "categories.id as categoryId", "categories.title as categoryTitle", "sources.title as sourceTitle", "sources.link as sourceLink")
-            ->where('categories.id', '=', $category_id)
-            ->orderBy('news.id', 'desc')
-            ->get();
-
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
+    public function source(): BelongsTo
+    {
+        return $this->belongsTo(Source::class, 'source_id', 'id');
+    }
 }

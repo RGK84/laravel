@@ -8,6 +8,7 @@ use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\IndexController as AdminIndexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,10 +31,12 @@ Route::get('/', [HomepageController::class, 'index'])
 
 //admin
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
+    Route::get('/', [AdminIndexController::class, 'index'])
+    ->name('index');
     Route::resource('categories', AdminCategoryController::class);
     Route::resource('news', AdminNewsController::class);
  });
- 
+
 //news
 Route::get('/news', [NewsController::class, 'index'])
     ->name('news');

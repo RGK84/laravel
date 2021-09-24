@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Order;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -9,17 +12,22 @@ class OrderController extends Controller
     public function index()
     {
         return view('order', [
-			'categoryList' => $this->getCategory()
+            'categoryList' => Category::all()
 		]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        $content = $request->all();
-        return response($content)
-            ->withHeaders([
-                'Content-Type' => 'application/txt; charset=UTF-8',
-                'Content-Disposition' => 'attachment; filename="order.txt"'
-            ]);
+        $order = Order::create($request->only('name', 'phone', 'email', 'text'));
+
+        if( $order ) {
+            return redirect()
+                ->route('order')
+                ->with('success', 'Запрос успешно отправлен');
+        }
+
+        return back()
+            ->with('error', 'Запрос не создан')
+            ->withInput();
     }
 }
