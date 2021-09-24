@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\NewsCreateRequest;
+use App\Http\Requests\NewsUpdateRequest;
 use App\Models\Source;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\News;
@@ -44,20 +47,20 @@ class NewsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  NewsCreateRequest $request
      */
-    public function store(Request $request)
+    public function store(NewsCreateRequest $request): RedirectResponse
     {
-        $news = News::create($request->only('category_id', 'title', 'description', 'author', 'source_id'));
+        $news = News::create($request->validated());
 
         if( $news ) {
             return redirect()
                 ->route('admin.news.index')
-                ->with('success', 'Запись успешно добавлена');
+                ->with('success', __('messages.admin.news.create.success'));
         }
 
         return back()
-            ->with('error', 'Запись не добавлена')
+            ->with('error', __('messages.admin.news.create.fail'))
             ->withInput();
     }
 
@@ -92,24 +95,22 @@ class NewsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  NewsUpdateRequest $request
      * @param  News $news
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, News $news)
+    public function update(NewsUpdateRequest $request, News $news): RedirectResponse
     {
-        $news = $news->fill(
-            $request->only(['category_id', 'title', 'description', 'author', 'source_id'])
-        )->save();
+        $news = $news->fill($request->validated())->save();
 
         if($news) {
             return redirect()
                 ->route('admin.news.index')
-                ->with('success', 'Запись успешно обновлена');
+                ->with('success', __('messages.admin.news.update.success'));
         }
 
         return back()
-            ->with('error', 'Запись не обновлена')
+            ->with('error', __('messages.admin.news.update.fail'))
             ->withInput();
     }
 
