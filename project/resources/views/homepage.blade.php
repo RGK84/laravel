@@ -5,7 +5,11 @@
 @endsection
 
 @section('header')
-    <h1 class="fw-bolder">Добро пожаловать на Новостной сайт</h1>
+    @guest
+        <h1 class="fw-bolder">Добро пожаловать на Новостной сайт!</h1>
+    @else
+        <h1 class="fw-bolder">{{ Auth::user()->name }}, добро пожаловать на Новостной сайт!</h1>
+    @endguest
 @endsection
 
 @section('content')

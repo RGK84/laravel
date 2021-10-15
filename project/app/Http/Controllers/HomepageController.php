@@ -7,6 +7,11 @@ use App\Models\News;
 
 class HomepageController extends Controller
 {
+//    public function __construct()
+//    {
+//        $this->middleware('auth');
+//    }
+
     public function index() {
 		return view('homepage', [
 			'newsCount' => News::query()->count(),

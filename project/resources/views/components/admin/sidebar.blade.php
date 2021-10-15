@@ -47,14 +47,21 @@
         </div>
     </li>
 
-    <!-- Nav Item - Charts -->
+    <!-- Nav Item - Users -->
+    <li class="nav-item @if(request()->routeIs('admin.users.*')) active @endif">
+        <a class="nav-link" href="{{ route('admin.users.index') }}">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Пользователи</span></a>
+    </li>
+
+    <!-- Nav Item - Categories -->
     <li class="nav-item @if(request()->routeIs('admin.categories.*')) active @endif">
         <a class="nav-link" href="{{ route('admin.categories.index') }}">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Рубрики</span></a>
     </li>
 
-    <!-- Nav Item - Tables -->
+    <!-- Nav Item - News -->
     <li class="nav-item @if(request()->routeIs('admin.news.*')) active @endif">
         <a class="nav-link" href="{{ route('admin.news.index') }}">
             <i class="fas fa-fw fa-table"></i>

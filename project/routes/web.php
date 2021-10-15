@@ -1,14 +1,17 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\IndexController as AdminIndexController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,17 +28,30 @@ use App\Http\Controllers\Admin\IndexController as AdminIndexController;
 //     return view('welcome');
 // });
 
+Auth::routes();
+
+//auth
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/account', AccountController::class)
+        ->name('account');
+    Route::get('/logout', function() {
+        Auth::logout();
+        return redirect()->route('login');
+    })->name('logout');
+
+    //admin
+    Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function() {
+        Route::get('/', [AdminIndexController::class, 'index'])
+            ->name('index');
+        Route::resource('categories', AdminCategoryController::class);
+        Route::resource('news', AdminNewsController::class);
+        Route::resource('users', AdminUserController::class);
+    });
+});
+
 //homepage
 Route::get('/', [HomepageController::class, 'index'])
     ->name('home');
-
-//admin
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
-    Route::get('/', [AdminIndexController::class, 'index'])
-    ->name('index');
-    Route::resource('categories', AdminCategoryController::class);
-    Route::resource('news', AdminNewsController::class);
- });
 
 //news
 Route::get('/news', [NewsController::class, 'index'])
@@ -62,3 +78,5 @@ Route::get('/order', [OrderController::class, 'index'])
     ->name('order');
 Route::post('/order/store', [OrderController::class, 'store'])
     ->name('order.store');
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
