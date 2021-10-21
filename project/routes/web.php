@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SocialController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\IndexController as AdminIndexController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\ParserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,7 +48,28 @@ Route::group(['middleware' => 'auth'], function() {
         Route::resource('categories', AdminCategoryController::class);
         Route::resource('news', AdminNewsController::class);
         Route::resource('users', AdminUserController::class);
+        Route::get('/parser', ParserController::class)
+            ->name('parser');
     });
+});
+
+//Route::group(['middleware' => 'guest'], function () {
+//    Route::get('/login/{social?}', [SocialController::class, 'start'])
+//        ->whereAlpha('social')
+//        ->name('login.social');
+//    Route::get('callback/{social}', [SocialController::class, 'callback'])
+//        ->whereAlpha('social')
+//        ->name('vk.callback');
+//});
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/vk/login', [SocialController::class, 'startVK'])
+        ->name('vk.login');
+    Route::get('vk/callback', [SocialController::class, 'callbackVK'])
+        ->name('vk.callback');
+    Route::get('/fb/login', [SocialController::class, 'startFB'])
+        ->name('fb.login');
+    Route::get('fb/callback', [SocialController::class, 'callbackFB'])
+        ->name('fb.callback');
 });
 
 //homepage
@@ -78,5 +101,7 @@ Route::get('/order', [OrderController::class, 'index'])
     ->name('order');
 Route::post('/order/store', [OrderController::class, 'store'])
     ->name('order.store');
+
+
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

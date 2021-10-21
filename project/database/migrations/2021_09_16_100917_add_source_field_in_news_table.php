@@ -30,6 +30,7 @@ class AddSourceFieldInNewsTable extends Migration
     public function down()
     {
         Schema::table('news', function (Blueprint $table) {
+            $table->dropForeign('source_id');
             $table->dropColumn('source_id');
         });
     }

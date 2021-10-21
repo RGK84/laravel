@@ -11,7 +11,7 @@ class Source extends Model
     use HasFactory;
 
     protected $table = "sources";
-    protected $guarded = ['id'];
+    protected $fillable = ['title', 'link'];
 
     public function news(): HasMany
     {

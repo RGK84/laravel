@@ -9,6 +9,11 @@
         <h1 class="fw-bolder">Добро пожаловать на Новостной сайт!</h1>
     @else
         <h1 class="fw-bolder">{{ Auth::user()->name }}, добро пожаловать на Новостной сайт!</h1>
+        @if (Auth::user()->avatar)
+            <br>
+                <img src="{{ Auth::user()->avatar }}" alt="аватар">
+            <br>
+        @endif
     @endguest
 @endsection
 
