@@ -9,7 +9,7 @@
 	<h1 class="h3 mb-2 text-gray-800">Написать новость</h1>
 
     @include('include.messages')
-    <form action="{{ route('admin.news.store') }}" method="post">
+    <form action="{{ route('admin.news.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="category_id">Категория</label>
@@ -27,6 +27,10 @@
         <div class="form-group">
             <label for="description">Текст новости<em>*</em></label>
             <textarea type="text" name="description" class="form-control" cols="80" rows="10" id="description">{{ old('description') }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="image">Картинка</label>
+            <input type="file" class="form-control" name="img" id="image">
         </div>
         <div class="form-group">
             <label for="author">Автор</label>

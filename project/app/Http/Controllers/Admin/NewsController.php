@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\NewsCreateRequest;
 use App\Http\Requests\NewsUpdateRequest;
 use App\Models\Source;
+use App\Services\UploadService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Category;
@@ -51,7 +52,15 @@ class NewsController extends Controller
      */
     public function store(NewsCreateRequest $request): RedirectResponse
     {
-        $news = News::create($request->validated());
+        $data = $request->validated();
+
+        if($request->hasFile('img')) {
+            $uploadService = app(UploadService::class);
+            $fileUrl = $uploadService->upload($request->file('img'));
+            $data['img'] = $fileUrl;
+        }
+
+        $news = News::create($data);
 
         if( $news ) {
             return redirect()
@@ -97,11 +106,18 @@ class NewsController extends Controller
      *
      * @param  NewsUpdateRequest $request
      * @param  News $news
-     * @return \Illuminate\Http\Response
      */
     public function update(NewsUpdateRequest $request, News $news): RedirectResponse
     {
-        $news = $news->fill($request->validated())->save();
+        $data = $request->validated();
+
+        if($request->hasFile('img')) {
+            $uploadService = app(UploadService::class);
+            $fileUrl = $uploadService->upload($request->file('img'));
+            $data['img'] = $fileUrl;
+        }
+
+        $news = $news->fill($data)->save();
 
         if($news) {
             return redirect()

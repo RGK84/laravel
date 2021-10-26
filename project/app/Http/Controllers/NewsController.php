@@ -9,7 +9,10 @@ class NewsController extends Controller
 {
     public function index() {
 		return view('news.index', [
-			'newsList' => News::with('category')->get(),
+			'newsList' => News::with('category')
+                ->paginate(
+                config('news.paginate')
+            ),
 			'categoryList' => Category::all()
 		]);
 	}

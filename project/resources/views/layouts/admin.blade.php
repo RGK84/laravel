@@ -14,6 +14,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('assets/css/admin-styles.css') }}" rel="stylesheet">
+
 </head>
 
 <body id="page-top">

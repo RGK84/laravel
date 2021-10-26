@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "58725077612196b4b6d045b3998ef398",
+    "content-hash": "8f4d7855c8d4669f8eec63f18a170d2f",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -121,6 +121,54 @@
                 }
             ],
             "time": "2021-08-15T20:50:18+00:00"
+        },
+        {
+            "name": "ckeditor/ckeditor",
+            "version": "4.16.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ckeditor/ckeditor4-releases.git",
+                "reference": "b2758d4603322b1fc12b4e6208240f1e785e1cfa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ckeditor/ckeditor4-releases/zipball/b2758d4603322b1fc12b4e6208240f1e785e1cfa",
+                "reference": "b2758d4603322b1fc12b4e6208240f1e785e1cfa",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+",
+                "LGPL-2.1+",
+                "MPL-1.1+"
+            ],
+            "authors": [
+                {
+                    "name": "CKSource",
+                    "homepage": "https://cksource.com"
+                }
+            ],
+            "description": "JavaScript WYSIWYG web text editor.",
+            "homepage": "https://ckeditor.com/ckeditor-4/",
+            "keywords": [
+                "CKEditor",
+                "ckeditor4",
+                "editor",
+                "fckeditor",
+                "html",
+                "javascript",
+                "richtext",
+                "text",
+                "wysiwyg"
+            ],
+            "support": {
+                "forum": "https://stackoverflow.com/tags/ckeditor",
+                "issues": "https://github.com/ckeditor/ckeditor4/issues",
+                "source": "https://github.com/ckeditor/ckeditor4",
+                "wiki": "https://ckeditor.com/docs/ckeditor4/latest/"
+            },
+            "time": "2021-08-12T12:19:19+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -2337,6 +2385,72 @@
                 }
             ],
             "time": "2021-08-28T21:27:29+00:00"
+        },
+        {
+            "name": "predis/predis",
+            "version": "v1.1.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/predis/predis.git",
+                "reference": "c50c3393bb9f47fa012d0cdfb727a266b0818259"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/predis/predis/zipball/c50c3393bb9f47fa012d0cdfb727a266b0818259",
+                "reference": "c50c3393bb9f47fa012d0cdfb727a266b0818259",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8"
+            },
+            "suggest": {
+                "ext-curl": "Allows access to Webdis when paired with phpiredis",
+                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Predis\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniele Alessandri",
+                    "email": "suppakilla@gmail.com",
+                    "homepage": "http://clorophilla.net",
+                    "role": "Creator & Maintainer"
+                },
+                {
+                    "name": "Till Krüss",
+                    "homepage": "https://till.im",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Flexible and feature-complete Redis client for PHP and HHVM",
+            "homepage": "http://github.com/predis/predis",
+            "keywords": [
+                "nosql",
+                "predis",
+                "redis"
+            ],
+            "support": {
+                "issues": "https://github.com/predis/predis/issues",
+                "source": "https://github.com/predis/predis/tree/v1.1.9"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/tillkruss",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-10-05T19:02:38+00:00"
         },
         {
             "name": "psr/container",

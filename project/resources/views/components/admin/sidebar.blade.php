@@ -13,7 +13,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('admin.index') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Панель управления</span></a>
     </li>
@@ -27,25 +27,25 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-            aria-expanded="true" aria-controls="collapsePages">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Страницы</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Авторизация</h6>
-                <a class="collapse-item" href="#">Вход</a>
-                <a class="collapse-item" href="#">Регистрация</a>
-                <a class="collapse-item" href="#">Восстановление пароля</a>
-                <div class="collapse-divider"></div>
-                <h6 class="collapse-header">Другие страницы:</h6>
-                <a class="collapse-item" href="#">Страница 404</a>
-                <a class="collapse-item" href="#">Пустая страница</a>
-            </div>
-        </div>
-    </li>
+{{--    <li class="nav-item">--}}
+{{--        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"--}}
+{{--            aria-expanded="true" aria-controls="collapsePages">--}}
+{{--            <i class="fas fa-fw fa-folder"></i>--}}
+{{--            <span>Страницы</span>--}}
+{{--        </a>--}}
+{{--        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">--}}
+{{--            <div class="bg-white py-2 collapse-inner rounded">--}}
+{{--                <h6 class="collapse-header">Авторизация</h6>--}}
+{{--                <a class="collapse-item" href="#">Вход</a>--}}
+{{--                <a class="collapse-item" href="#">Регистрация</a>--}}
+{{--                <a class="collapse-item" href="#">Восстановление пароля</a>--}}
+{{--                <div class="collapse-divider"></div>--}}
+{{--                <h6 class="collapse-header">Другие страницы:</h6>--}}
+{{--                <a class="collapse-item" href="#">Страница 404</a>--}}
+{{--                <a class="collapse-item" href="#">Пустая страница</a>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </li>--}}
 
     <!-- Nav Item - Users -->
     <li class="nav-item @if(request()->routeIs('admin.users.*')) active @endif">
@@ -66,6 +66,19 @@
         <a class="nav-link" href="{{ route('admin.news.index') }}">
             <i class="fas fa-fw fa-table"></i>
             <span>Новости</span></a>
+    </li>
+
+    <!-- Nav Item - Resources -->
+    <li class="nav-item @if(request()->routeIs('admin.resources.*')) active @endif">
+        <a class="nav-link" href="{{ route('admin.resources.index') }}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Ресурсы</span></a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('home') }}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Выход</span></a>
     </li>
 
     <!-- Divider -->

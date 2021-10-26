@@ -13,7 +13,9 @@
 	@forelse($newsList as $news)
 		@if ($loop->first)
 			<div class="card mb-4">
-				<a href="{{ route('news.show', ['id' => $news->id]) }}"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
+				<a href="{{ route('news.show', ['id' => $news->id]) }}">
+                    <img class="card-img-top" src="@if($news->img) {{ Storage::disk('public')->url($news->img) }} @else https://dummyimage.com/850x350/dee2e6/6c757d.jpg @endif" alt="..." />
+                </a>
 				<div class="card-body">
 					<div class="small text-muted">{{ $news->created_at }}</div>
 					<div class="small text-muted"><a href="{{ route('category.show', ['id' => $news->category_id]) }}">{{ $news->category->title }}</a></div>
@@ -27,7 +29,9 @@
 			<div class="col-lg-6">
 				<!-- Blog post-->
 				<div class="card mb-4">
-					<a href="{{ route('news.show', ['id' => $news->id]) }}"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+					<a href="{{ route('news.show', ['id' => $news->id]) }}">
+                        <img class="card-img-top" src="@if($news->img) {{ Storage::disk('public')->url($news->img) }} @else https://dummyimage.com/700x350/dee2e6/6c757d.jpg @endif" alt="..." />
+                    </a>
 					<div class="card-body">
 						<div class="small text-muted">{{ $news->created_at }}</div>
                         <div class="small text-muted"><a href="{{ route('category.show', ['id' => $news->category_id]) }}">{{ $news->category->title }}</a></div>
@@ -43,18 +47,7 @@
 	@endforelse
 	@empty(!$newsList)
 		<!-- Pagination-->
-		<nav aria-label="Pagination">
-			<hr class="my-0" />
-			<ul class="pagination justify-content-center my-4">
-				<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Назад</a></li>
-				<li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-				<li class="page-item"><a class="page-link" href="#">15</a></li>
-				<li class="page-item"><a class="page-link" href="#">Вперед</a></li>
-			</ul>
-		</nav>
+        {!! $newsList->links() !!}
 	@endempty
 	</div>
 @endsection

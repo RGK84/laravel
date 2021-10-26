@@ -10,7 +10,9 @@
 
 @section('content')
     <div class="card mb-4">
-        <a href="#"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
+        <a href="#">
+            <img class="card-img-top" src="@if($news->img) {{ Storage::disk('public')->url($news->img) }} @else https://dummyimage.com/700x350/dee2e6/6c757d.jpg @endif" alt="..." />
+        </a>
         <div class="card-body">
             <div class="small text-muted">{{ $news->created_at }}</div>
             <div class="small text-muted"><a href="{{ route('category.show', ['id' => $news->category_id]) }}">{{ $news->category->title }}</a></div>

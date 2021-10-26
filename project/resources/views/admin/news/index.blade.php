@@ -9,6 +9,7 @@
 	<h1 class="h3 mb-2 text-gray-800">Список новостей</h1>
 	<div class="my-4">
 		<a href="{{ route('admin.news.create') }}" class="btn btn-primary">Создать новую</a>
+        <a href="{{ route('admin.parser') }}" class="btn btn-primary">Парсить новости</a>
 	</div>
 
     @include('include.messages')
